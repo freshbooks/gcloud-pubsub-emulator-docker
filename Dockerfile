@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:162.0.0-alpine
+FROM google/cloud-sdk:257.0.0-alpine
 
 LABEL maintainer "Adilson Carvalho <lc.adilson@gmail.com>"
 
