@@ -53,17 +53,20 @@ def notifyStatus(build, slackToken) {
 }
 
 def fetchGitCommits(build) {
-  commit = commitHashForBuild(build)
+  def commits = []
   if (!(env.BRANCH_NAME ==~ /^PR-\d+$/)) {
-    return getBuildChangeSets(build).join(',')
+    commits = getBuildChangeSets(build)
   }
 
-  return commit
+  return commits.size() == 0 ? commitHashForBuild(build) : commits.join(',')
 }
 
 @NonCPS
 def getBuildChangeSets(build) {
   def commits = []
+  if (build == null) {
+    return commits
+  }
   if (build.rawBuild.changeSets.size() == 0) {
     commits.addAll(getBuildChangeSets(build.getPreviousBuild()))
   } else {
@@ -92,4 +95,3 @@ def commitHashForBuild(build) {
 
   return scmAction?.revision.getHash()
 }
-
