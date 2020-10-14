@@ -1,4 +1,3 @@
-def FRESHBUILDS_VERSION = "1.5.0"
 def APP_NAME = 'gcloud-pubsub-emulator'
 
 
@@ -39,7 +38,7 @@ pipeline {
   post {
     always {
       container('python') {
-        sh "sudo pip install -i https://${ARTIFACTORY_CREDENTIALS_USR}:${ARTIFACTORY_CREDENTIALS_PSW}@freshbooks.jfrog.io/freshbooks/api/pypi/pypi/simple freshbuilds==${FRESHBUILDS_VERSION}"
+        sh "sudo pip install -i https://${ARTIFACTORY_CREDENTIALS_USR}:${ARTIFACTORY_CREDENTIALS_PSW}@freshbooks.jfrog.io/freshbooks/api/pypi/pypi/simple -r requirements-jenkins.txt"
         notifyStatus(currentBuild, SLACK_TOKEN)
       }
     }
