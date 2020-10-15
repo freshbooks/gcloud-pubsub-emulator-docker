@@ -3,7 +3,7 @@ FROM google/cloud-sdk:257.0.0-alpine
 LABEL maintainer "Adilson Carvalho <lc.adilson@gmail.com>"
 
 RUN apk --update add openjdk7-jre
-RUN gcloud components install --quiet beta pubsub-emulator
+RUN gcloud components install --quiet beta pubsub-emulator --verbosity debug
 RUN mkdir -p /var/pubsub
 
 VOLUME /var/pubsub
